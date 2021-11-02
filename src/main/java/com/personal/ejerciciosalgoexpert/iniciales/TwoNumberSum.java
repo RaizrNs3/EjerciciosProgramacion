@@ -1,5 +1,8 @@
 package com.personal.ejerciciosalgoexpert.iniciales;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class TwoNumberSum {
     /**
      * Ejercicio: Write a function that takes in a non-empty array of distinct integers and an integer representing a
@@ -16,6 +19,23 @@ public class TwoNumberSum {
      **/
 
     public static int[] twoNumberSum(int[] array, int targetSum) {
+        /* 1) Formar mapa con el array */
+        Map<Integer, Integer> mapArr = new HashMap<>();
+        int []resp = new int[2];
+        for (Integer i : array) {
+            mapArr.put(i, i);
+        }
+        /* 2) Iterar sobre las llaves del mapa con la formula: targetSum - keyArr[n] = elementoEnMapa */
+        for(Integer key : mapArr.keySet()){
+            int actualAttemp = targetSum - key;
+            /* 3) Si el elemento en el mapa no existe incrementar n */
+            if(mapArr.containsKey(actualAttemp)){
+                resp[0] = key;
+                resp[1] = mapArr.get(actualAttemp);
+                /* 4) Si el elemento en el mapa si existe retornar el array [keyArr[n], elementoEnMapa] */
+                return resp;
+            }
+        }
         return new int[0];
     }
 }
