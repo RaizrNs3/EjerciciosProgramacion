@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TwoNumberSumTest {
     /**
-     * Test del ejercicio TwoNumberSumTest
+     * Tests del ejercicio TwoNumberSumTest
      * @author Daniel López */
 
     @Test
