@@ -1,6 +1,8 @@
 package com.personal.ejerciciosalgoexpert.iniciales;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 public class ValidateSubsequence {
     /**
@@ -15,7 +17,17 @@ public class ValidateSubsequence {
      * sequence = [1,6,-1,10]
      * Sample output = true */
     public static boolean isValidSubsequence(List<Integer> array, List<Integer> sequence) {
-        // Write your code here.
+        int lenSequence = sequence.size();
+        int lenArray = array.size();
+        int indexSequence = 0;
+        int indexArray = 0;
+        while(indexArray < lenArray){
+            if(Objects.equals(sequence.get(indexSequence), array.get(indexArray))){
+                indexSequence++;
+            }
+            indexArray++;
+            if(indexSequence == lenSequence) return true;
+        }
         return false;
     }
 }
