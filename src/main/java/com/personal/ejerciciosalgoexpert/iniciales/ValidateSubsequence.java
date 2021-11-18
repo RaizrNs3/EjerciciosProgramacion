@@ -14,8 +14,15 @@ public class ValidateSubsequence {
      * array = [5,1,22,25,6,-1,8,10]
      * sequence = [1,6,-1,10]
      * Sample output = true */
+
+    // O(N) time | O(1) space
     public static boolean isValidSubsequence(List<Integer> array, List<Integer> sequence) {
-        // Write your code here.
-        return false;
+        int arrIdx = 0;
+        int seqIdx = 0;
+        while(arrIdx < array.size() && seqIdx < sequence.size()){
+            if(array.get(arrIdx).equals(sequence.get(seqIdx))) seqIdx++;
+            arrIdx++;
+        }
+        return seqIdx == sequence.size();
     }
 }
