@@ -1,6 +1,8 @@
 package com.personal.ejerciciosalgoexpert.iniciales;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TournamentWinner {
     /**
@@ -25,7 +27,7 @@ public class TournamentWinner {
      * corresponding competition in the competitions array. Specifically,
      * results[i] denotes the winner of competitions[i] , where a
      * 1 in the results array means that the home team in the
-     * corresponding competition won and a means that the away team
+     * corresponding competition won and a 0 means that the away team
      * won.
      * It's guaranteed that exactly one team will win the tournament and that
      * each team will compete against all other teams exactly once. It's also
@@ -42,7 +44,31 @@ public class TournamentWinner {
      * // C# - 3 points
      * // Python - 6 points */
     public static String tournamentWinner(ArrayList<ArrayList<String>> competitions, ArrayList<Integer> results) {
-        // Write your code here.
-        return "";
+        Map<String, Integer> tabla = new HashMap<>();
+        int indexCompetitions = 0;
+        for (ArrayList<String> competition : competitions) {
+            /* Obetner al ganador */
+            String ganador = competition.get(invertValue(results.get(indexCompetitions)));
+            /* Operaciones con el mapa */
+            if(tabla.containsKey(ganador)){
+                tabla.put(ganador, tabla.get(ganador) + 1);
+            } else{
+                tabla.put(ganador, 1);
+            }
+            indexCompetitions++;
+        }
+        int maxPoints = 0;
+        String winner = "";
+        for (String competidor : tabla.keySet()) {
+            if(tabla.get(competidor) > maxPoints){
+                winner = competidor;
+                maxPoints = tabla.get(competidor);
+            }
+        }
+        return winner;
+    }
+
+    private static int invertValue(int result){
+        return result == 1? 0 : 1;
     }
 }
