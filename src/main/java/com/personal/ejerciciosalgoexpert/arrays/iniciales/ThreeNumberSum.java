@@ -1,7 +1,9 @@
 package com.personal.ejerciciosalgoexpert.arrays.iniciales;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ThreeNumberSum {
     /**
@@ -17,7 +19,36 @@ public class ThreeNumberSum {
      * [[-8, 2, 6], [-8, 3, 5], [-6, 1, 5]]*/
 
     public static List<Integer[]> threeNumberSum(int[] array, int targetSum) {
-        // Write your code here.
-        return new ArrayList<>();
+        Arrays.sort(array);
+
+        List<Integer> orderedArrayList = Arrays.stream(array).boxed().collect(Collectors.toList());
+        List<Integer[]> tripletsList = new ArrayList<>();
+
+        for(int i = 0; i < array.length; i++) {
+            for (int j = i+1; j < array.length; j++) {
+                Integer[] tmpArray = new Integer[3];
+                int tmpSum = array[i] + array[j];
+                int x = targetSum - tmpSum;
+                if (orderedArrayList.contains(x)) {
+                    tmpArray[0] = array[i];
+                    tmpArray[1] = array[j];
+                    tmpArray[2] = x;
+                    Arrays.sort(tmpArray);
+                    if (!containsSubArray(tripletsList, tmpArray) && x != array[i] && x != array[j]) {
+                        tripletsList.add(tmpArray);
+                    }
+                }
+            }
+        }
+        return tripletsList;
+    }
+
+    private static boolean containsSubArray(List<Integer[]> tripletsList, Integer[] tmpArray) {
+        for (Integer[] arr : tripletsList ) {
+            if (Arrays.equals(arr, tmpArray)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
